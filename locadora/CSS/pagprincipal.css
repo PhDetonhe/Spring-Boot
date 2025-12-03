@@ -1,0 +1,218 @@
+.giogio {
+            
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .giogio h1 {
+            
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .giogio p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .secaoCarros {
+            padding: 2rem 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .tituloSecao {
+            text-align: center;
+            color: white;
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+        
+        .gradeCarros {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .cardCarro {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(8px);
+        }
+        
+        .cardCarro:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+        
+        .imagemCarro {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+        }
+        
+        .conteudoCard {
+            padding: 1.5rem;
+        }
+        
+        .nomeCarro {
+            color: #143548;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .infoCarro {
+            color: #444;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .precoCarro {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #226b99;
+            margin: 1rem 0;
+        }
+        
+        .statusCarro {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        
+        .disponivel {
+            background-color: #d8f7e8;
+            color: #1d7a4c;
+            border: 1px solid #1d7a4c;
+        }
+        
+        .indisponivel {
+            background-color: #f9d8d8;
+            color: #a72525;
+            border: 1px solid #a72525;
+        }
+        
+        .areaAcoes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.2rem;
+        }
+        
+        .botaoReservar {
+            background: #226b99;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.25s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .botaoReservar:hover {
+            background: #184b70;
+        }
+        
+        .botaoDetalhes {
+            background: transparent;
+            color: #226b99;
+            border: 1px solid #226b99;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.25s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .botaoDetalhes:hover {
+            background: #226b99;
+            color: white;
+        }
+        
+        .estatisticas {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255,255,255,0.8);
+            border-radius: 14px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .estatisticaItem {
+            text-align: center;
+        }
+        
+        .estatisticaValor {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #226b99;
+            display: block;
+        }
+        
+        .estatisticaLabel {
+            font-size: 1rem;
+            color: #444;
+        }
+        
+        @media (max-width: 768px) {
+            .gradeCarros {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .estatisticas {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .areaAcoes {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .gradeCarros {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gradeCarros {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            .gradeCarros {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }

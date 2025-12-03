@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Carros</title>
+    <link rel="stylesheet" href="CSS/yay.css">
+</head>
+<body>
+    <header>
+        <div class="conteudoCabecalho">
+            <a href="paginaprincipal.html" class="logo">LOCADORA</a>
+            <nav class="navegacao">
+                <a href="cadastroCarros.html" class="linkNav">Carros</a>
+                <a href="cadastroClientes.html" class="linkNav">Clientes</a>
+                <a href="cadastroAgendamento.html" class="linkNav">Agendamentos</a>
+                <a href="login.html" class="linkNav">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="paginaFormulario">
+        <div class="containerFormulario">
+            <div class="cardFormulario">
+                <h1 class="tituloPrincipal">CADASTRAR CARRO</h1>
+                
+                <form id="formCarro">
+                    <div class="grupoInput">
+                        <label>Modelo</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Marca</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Ano</label>
+                        <input type="number" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Placa</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Cor</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Valor Diária (R$)</label>
+                        <input type="number" step="0.01" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Status</label>
+                        <select class="inputSelecao">
+                            <option value="disponivel">Disponível</option>
+                            <option value="alugado">Alugado</option>
+                            <option value="manutencao">Manutenção</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="botaoPrincipal">SALVAR CARRO</button>
+                </form>
+                
+                <div id="mensagemCarro" class="areaMensagem" style="display: none;"></div>
+                
+                <div class="textoCentromargemTopo">
+                    <a href="listaCarros.html" class="botaoSecundario">VER CARROS CADASTRADOS</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>Sistema de Locadora</p>
+    </footer>
+</body>
+</html>

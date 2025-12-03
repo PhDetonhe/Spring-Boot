@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Apostle Books</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>  
+    <div class="container">
+        <div class="form-card">
+            <h1>Login</h1>
+
+            <form onsubmit="fazerLogin(event)">
+                <input class="form-group" type="email" id="email" placeholder="E-mail" required>
+                <input class="form-group" type="password" id="password" placeholder="Senha" required>
+                <button class="btn-submit" type="submit">Entrar</button>
+            </form>
+
+            <div id="mensagem" class="message"></div>
+            </form>
+
+            <div class="form-footer">
+                <p>Ao fazer login, você concorda com nossos <a href="#">Termos de Uso</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/testelogin.js"></script>
+</body>
+
+</html>

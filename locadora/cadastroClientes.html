@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="CSS/yay.css">
+</head>
+<body>
+    <header>
+        <div class="conteudoCabecalho">
+            <a href="paginaprincipal.html" class="logo">LOCADORA</a>
+            <nav class="navegacao">
+                <a href="cadastroCarros.html" class="linkNav">Carros</a>
+                <a href="cadastroClientes.html" class="linkNav">Clientes</a>
+                <a href="cadastroAgendamento.html" class="linkNav">Agendamentos</a>
+                <a href="login.html" class="linkNav">Sair</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="paginaFormulario">
+        <div class="containerFormulario">
+            <div class="cardFormulario">
+                <h1 class="tituloPrincipal">CADASTRAR CLIENTE</h1>
+                
+                <form id="formCliente">
+                    <div class="grupoInput">
+                        <label>Nome Completo</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>CPF</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>E-mail</label>
+                        <input type="email" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Telefone</label>
+                        <input type="tel" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Endereço</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>CNH</label>
+                        <input type="text" class="inputTexto" required>
+                    </div>
+                    
+                    <div class="grupoInput">
+                        <label>Data Nascimento</label>
+                        <input type="date" class="inputTexto" required>
+                    </div>
+                    
+                    <button type="submit" class="botaoPrincipal">SALVAR CLIENTE</button>
+                </form>
+                
+                <div class="textoCentromargemTopo">
+                    <a href="listaClientes.html" class="botaoSecundario">VER CLIENTES CADASTRADOS</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>Sistema de Locadora</p>
+    </footer>
+</body>
+</html>

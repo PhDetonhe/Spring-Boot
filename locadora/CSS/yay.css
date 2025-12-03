@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: url("wallpaper.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: #2b2b2b;
+    line-height: 1.6;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.conteudoCabecalho {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #143548;
+    text-decoration: none;
+}
+
+.navegacao {
+    display: flex;
+    gap: 1rem;
+}
+
+.linkNav {
+    color: #143548;
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.linkNav:hover {
+    background: rgba(255,255,255,0.9);
+}
+
+.paginaFormulario {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 1rem 2rem;
+}
+
+.containerFormulario {
+    max-width: 550px;
+    width: 100%;
+}
+
+.cardFormulario {
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(8px);
+}
+
+.tituloPrincipal {
+    color: #143548;
+    margin-bottom: 1.3rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.grupoInput {
+    margin-bottom: 1.4rem;
+}
+
+.grupoInput label {
+    display: block;
+    color: #143548;
+    margin-bottom: 0.4rem;
+}
+
+.inputTexto,
+.inputSelecao {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    transition: 0.2s;
+    background: rgba(255,255,255,0.6);
+}
+
+.inputTexto:focus,
+.inputSelecao:focus {
+    border-color: #226b99;
+    background: rgba(255,255,255,0.85);
+    outline: none;
+}
+
+.botaoPrincipal {
+    width: 100%;
+    padding: 0.9rem;
+    background: #226b99;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.25s;
+    margin-top: 0.5rem;
+}
+
+.botaoPrincipal:hover {
+    background: #184b70;
+}
+
+.botaoSecundario {
+    background: transparent;
+    color: #226b99;
+    border: 1px solid #226b99;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.botaoSecundario:hover {
+    background: #226b99;
+    color: white;
+}
+
+.areaMensagem {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.mensagemSucesso {
+    background: #d8f7e8;
+    color: #1d7a4c;
+    border: 1px solid #1d7a4c;
+}
+
+.mensagemErro {
+    background: #f9d8d8;
+    color: #a72525;
+    border: 1px solid #a72525;
+}
+
+.paginaListagem {
+    min-height: 100vh;
+    padding: 7rem 1rem 2rem;
+}
+
+.containerListagem {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gradeItens {
+    display: grid;
+    gap: 1.3rem;
+    margin-top: 2rem;
+}
+
+.cardItem {
+    background: rgba(255,255,255,0.7);
+    padding: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    backdrop-filter: blur(6px);
+    transition: 0.25s ease;
+}
+
+.cardItem:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.85);
+}
+
+.tituloItem {
+    color: #226b99;
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.descricaoItem {
+    color: #444;
+}
+
+.rodape {
+    background: rgba(255,255,255,0.7);
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.95rem;
+    color: #333;
+    backdrop-filter: blur(5px);
+}
+
+@media (max-width: 768px) {
+    .conteudoCabecalho {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .gradeItens {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradeItens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .gradeItens {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.textoCentromargemTopo{
+    width: 100%;
+    text-align: center;
+}
