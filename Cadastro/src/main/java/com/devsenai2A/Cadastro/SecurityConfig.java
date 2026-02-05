@@ -1,4 +1,4 @@
-package com.devsenai2A.Cadastro;
+package com.devSenai2A.cadastro;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,22 +10,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
-                );
 
-        return http.build();
-    }
-    // Bean do BCryptPasswordEncoder para criptografar e validar senhas
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    
-   
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+http
+.csrf(csrf -> csrf.disable())
+.authorizeHttpRequests(auth -> auth
+.requestMatchers("/usuarios/**", "/login/**").permitAll()
+.anyRequest().authenticated()
+);
 
+return http.build();
+}
+// Bean do BCryptPasswordEncoder para criptografar e validar senhas
+@Bean
+public BCryptPasswordEncoder passwordEncoder() {
+return new BCryptPasswordEncoder();
+}
 }
