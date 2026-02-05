@@ -33,5 +33,13 @@ public class UsuarioController {
          .status(HttpStatus.CREATED)
          .body(service.cadastrar(usuario));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>deletarUsuario(@PathVariable Long id) {
+        service.deletarUsuario(id);
+        return
+                ResponseEntity.noContent().build();
+    }
     
 }
+
