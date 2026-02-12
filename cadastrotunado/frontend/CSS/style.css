@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(99, 65, 253);
+}
+
+.logincontainer {
+    padding: 30px 40px;
+    width: 520px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;   
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+input, select{
+    border: none;
+    margin: 10px;
+    width: 90%;
+    height: 5vh;
+    background-color:rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 2px solid rgb(102, 101, 101);
+}
+
+input::placeholder{
+    font-size: 15px;
+    padding: 10px;  
+    color: rgb(0, 0, 0); 
+}
+
+button{
+    font-weight: bold;
+    background-color: rgb(69, 27, 255);
+    color: white;
+    padding: 10px;
+    width: 90%;
+    border-radius: 20px;
+}
+
