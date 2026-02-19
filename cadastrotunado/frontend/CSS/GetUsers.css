@@ -4,24 +4,26 @@
     box-sizing: border-box;
 }
 
-.box1{
-    display: inline-block;
-    gap: 20%;  
-    border: solid red 4px;
+h1{
+    font-size: 48px;
 }
 
-.box2{
-    display: inline-block;
-    gap: 20%; 
-    border: solid red 4px; 
+body{
+    background-color: rgb(240, 239, 239);
+}
+
+hr{
+    color: gray;
+    width: 100%;
 }
 
 th{
-    background-color: blueviolet;  
+    background-color: rgb(252, 71, 96);  
     padding: 15px;
 }
 
 table{
+    background-color: rgb(255, 207, 207);
     text-align: center;
     text-justify: left;
     border-collapse: collapse;
@@ -32,6 +34,10 @@ table{
     margin-left: auto;
 }
 
+tbody tr{
+    border-bottom: 1px solid;
+}
+
 thead{
     color: white;
 }
@@ -40,8 +46,8 @@ button{
     padding: 10px;
     border-radius: 20px;
     color: white;
-    background-color:blueviolet;
-    border: solid 3px black;
+    background-color:rgb(252, 71, 96);
+    border: solid 2px black;
 }
 
 .superbox{
@@ -49,5 +55,8 @@ button{
     justify-content: center;
     display: flex;
     height: 50vh;
-    border: solid red 4px;
+}
+
+.NEWUSER{
+    margin-bottom: 20px;
 }

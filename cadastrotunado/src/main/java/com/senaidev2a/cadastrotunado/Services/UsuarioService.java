@@ -30,27 +30,33 @@ public class UsuarioService {
         }
     }
 
-    public Usuario atualizar(Long id, Usuario dados) {
-    Usuario usuario = repository.findById(id).orElse(null);
+   
+    public Usuario atualizarUsuario(Long id, Usuario dados){
 
-        if (usuario == null) {
-        return null;
-        }
+        Usuario usuario = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
+        
+        if (dados.getNome() != null){
             usuario.setNome(dados.getNome());
-            usuario.setEmail(dados.getEmail());
-            usuario.setSenha(dados.getSenha());
-            usuario.setPerfil(dados.getPerfil());
-            usuario.setEndereco(dados.getEndereco());
-            usuario.setBairro(dados.getBairro());
-            usuario.setComplemento(dados.getComplemento());
-            usuario.setCep(dados.getCep());
-            usuario.setCidade(dados.getCidade());
-            usuario.setEstado(dados.getEstado());
-
-        return repository.save(usuario);
         }
 
+        if (dados.getEmail() != null){
+            usuario.setEmail(dados.getEmail());
+        }
 
+         if (dados.getSenha() != null){
+            usuario.setSenha(dados.getSenha());
+        }
+
+         if (dados.getPerfil() != null){
+            usuario.setPerfil(dados.getPerfil());
+        }
+         
+         if (dados.getCidade() != null){
+            usuario.setCidade(dados.getCidade());
+        }
+        
+        return repository.save(usuario);
     }
-
+}

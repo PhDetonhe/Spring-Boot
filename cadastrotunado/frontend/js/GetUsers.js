@@ -12,7 +12,7 @@ fetch("http://localhost:8080/usuarios")
                     <td>${usuario.perfil}</td>
                     <td>${usuario.cidade}</td>
                     <td>
-                    <button type = "submit" class = "editar" onclick = "editar(${usuario.id})">Editar</button>
+                    <a href="Update.html"><button type = "submit" class = "editar" onclick = "editar(${usuario.id})">Editar</button></a>
                     <button type = "submit" class = "deletar" onclick = "deletar(${usuario.id})">Excluir</button>
                     </td>
                 </tr>

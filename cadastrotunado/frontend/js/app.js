@@ -22,9 +22,23 @@ form.addEventListener('submit', function(e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(usuario)
     })
-    .then(res => {
+     .then(res => {
         if (!res.ok) throw new Error();
-        mensagem.innerHTML = '<span class="sucesso">Usuário cadastrado com sucesso!</span>';
+        return res.json(); 
+    })
+    .then(data => {
+
+        
+        usuario = data.id;
+
+        console.log("ID salvo:", usuario);
+
+        mensagem.innerHTML = `
+            <span class="sucesso">
+                Usuário cadastrado com sucesso! ID: ${usuario}
+            </span>
+        `;
+
         form.reset();
     })
     .catch(() => {
