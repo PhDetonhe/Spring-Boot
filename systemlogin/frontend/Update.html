@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/Login.css">
+    <title>Atualizar Usuário</title> 
+</head>
+<body>
+    <div class="login-container"> 
+        <h2>Registre novas informações</h2> 
+        
+        <form id="Update">
+            
+            <input type="hidden" id="usuarioId" value="1">
+            <div class="input-group">
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="Email" 
+                autocomplete="off">
+            </div>
+            
+            <div class="input-group">
+            <input 
+                type="password" 
+                id="senha" 
+                placeholder="Senha"
+                autocomplete="off">
+            </div>
+            
+            <button type="submit">Atualoza</button>
+            <p id="mensagem"></p>
+        </form>
+    </div> 
+    
+    <script src="js/Update.js"></script>
+</body>
+</html>
