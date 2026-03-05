@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <title>Document</title>
 </head>
+
 <body>
-        <div class="logincontainer">
+    <div class="logincontainer">
         <br>
         <h1>Cadastro</h1>
         <br>
         <form id="Cadastro">
-            
-            <input placeholder="Nome" type="text" id="nome" >
-            
+
+            <input placeholder="Name" type="text" id="name">
+
             <input placeholder="Email" type="email" id="email">
-            
+
             <input placeholder="Senha" type="password" id="senha">
-            
-           <input placeholder="Perfil" type="text" id="perfil">
-            
+
+            <input placeholder="Perfil" type="text" id="perfil">
+
             <input placeholder="Endereço" type="text" id="endereco">
-            
+
             <input placeholder="Bairro" type="text" id="bairro">
-            
+
             <input placeholder="Complemento" type="text" id="complemento">
-            
+
             <input placeholder="CEP" type="text" id="cep">
-        
+
             <input placeholder="Cidade" type="text" id="cidade">
-            
+
             <input placeholder="Estado" type="text" id="estado">
-        <br>
-        <button type="submit"> Salvar Usuario </button>
-        <p id="mensagem"></p>
+
+            <div class="form-group">
+                <label for="foto">Foto de perfil</label>
+                <input type="file" id="fotoInput" accept="image/*">
+                <img id="preview" src="" style="display:none; width: 100px; margin-top: 10px; border-radius: 50%;">
+            </div>
+
+            <br>
+            <a href="GetUsers.html"><button type="submit"> Salvar Usuario </button></a>
+            <p id="resultado"></p>
+            <p id="erro"></p>
         </form>
-        </div>
+    </div>
 </body>
 <script src="js/app.js"></script>
+
 </html>

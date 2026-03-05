@@ -1,29 +1,38 @@
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+  document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+            const errorMsg = document.getElementById("errorMsg");
 
-    const params = new URLSearchParams();
-    params.append("username", email);  // Spring espera "username"
-    params.append("password", senha);  // Spring espera "password"
+            errorMsg.textContent = "";
 
-    fetch("/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: params,
-        credentials: "include"
-    })
-    .then(response => {
-        if (response.redirected) {
-            window.location.href = response.url;
-        } else {
-            document.getElementById("errorMsg").innerText = "Email ou senha inválidos.";
-        }
-    })
-    .catch(() => {
-        document.getElementById("errorMsg").innerText = "Erro ao tentar logar.";
-    });
-});
+            fetch("http://localhost:8080/user/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Email ou senha inválidos");
+                    }
+                    return response.json();
+                })
+                .then(usuario => {
+                    // salva usuário no navegador
+                    localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+
+                    alert("Bem-vindo " + usuario.nome);
+
+                    // redireciona
+                    window.location.href = "GetUsers.html";
+                })
+                .catch(error => {
+                    errorMsg.textContent = error.message;
+                });
+        });
