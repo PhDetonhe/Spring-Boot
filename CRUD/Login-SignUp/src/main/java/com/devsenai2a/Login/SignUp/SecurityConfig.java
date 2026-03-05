@@ -15,11 +15,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
+                .cors(cors -> {})
                 .csrf(csrf -> csrf.disable()) // necessário para H2 funcionar
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll() // libera H2
                         .requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/user/**").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.disable()) // H2 usa iframe

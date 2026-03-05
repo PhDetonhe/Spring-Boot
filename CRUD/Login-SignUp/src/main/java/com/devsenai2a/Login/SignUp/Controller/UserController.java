@@ -47,5 +47,21 @@ public class UserController {
         userService.delete(id);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> dados) {
+
+        String email = dados.get("email");
+        String senha = dados.get("senha");
+
+        User usuario = userService.login(email, senha);
+
+        if (usuario == null) {
+            return ResponseEntity.status(401).body("Email ou senha inválidos");
+        }
+
+        return ResponseEntity.ok(usuario);
+    }
+
+
 
 }

@@ -25,6 +25,8 @@ public class User {
     private String cep;
     private String cidade;
     private String estado;
+    @Column(columnDefinition = "LONGTEXT")
+    private String foto;
 
     public User(Integer id, String name, String email, String senha, Perfil perfil, String endereco, String bairro, String complemento, String cep, String cidade, String estado) {
         this.id = id;
@@ -38,6 +40,7 @@ public class User {
         this.cep = cep;
         this.cidade = cidade;
         this.estado = estado;
+
     }
 
     public User() {
@@ -130,6 +133,14 @@ public class User {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
 
