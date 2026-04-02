@@ -16,10 +16,32 @@ public class CategoriaService {
     }
 
     public List<Categoria> getAll(){
-        return CategoriaRepository.findAll();
+        return repository.findAll();
     }
 
-    public Categoria findById(Integer id){
-        return CategoriaRepository.findById(id).orElseThrow(()-> new RuntimeException("Categoria não encontrada!"));
+    public Categoria findById(Integer id_categoria){
+        return repository.findById(id_categoria).orElseThrow(()-> new RuntimeException("Categoria não encontrada!"));
     }
+
+    public Categoria save(Categoria categoria){
+        return repository.save(categoria);  
+    }
+
+    public void delete(Integer id_categoria){
+        repository.deleteById(id_categoria);
+    }
+
+     public Categoria update(Integer id_categoria, Categoria categoria) {
+
+        Categoria categoriaExistente = repository.findById(id_categoria)
+                .orElseThrow(() -> new RuntimeException("categoria não encontrada"));
+
+        categoriaExistente.setNome(categoria.getNome());
+        categoriaExistente.setDescricao(categoria.getDescricao());
+        categoriaExistente.setAtivo(categoria.isAtivo());
+
+        return repository.save(categoriaExistente);
+    }
+
+
 }

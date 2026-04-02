@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+
+<body class="bg-slate-300">
+    <!-- barra de nav.-->
+    <nav class="bg-slate-400 shadow-md">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+
+                <!-- logo provisorio do petshop -->
+                <div
+                    class="text-blue-900 text-3xl font-bold transition-all duration-300 ease-out hover:text-white hover:scale-105 hover:-translate-y-0.5">
+                    PetShop
+                </div>
+
+                <!-- barra de pesquisa-->
+                <div class="hidden md:flex flex-1 mx-6">
+                    <input type="text" placeholder="O que seu pet precisa"
+                        class="w-96 px-4 py-2 rounded-l-lg outline-none">
+
+                    <button class="bg-blue-900 text-white px-4 rounded-r-lg">
+                        🔍
+                    </button>
+                </div>
+
+                <!-- icones -->
+                <div class="flex items-center gap-4 text-xl">
+
+                    <button title="Login" class="text-2xl text-blue-900 hover:text-white transition">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
+
+                    <button title="Favoritos" class="text-2xl text-blue-900 hover:text-red-400 transition">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+
+                    <button title="Carrinho" class="text-2xl text-blue-900 hover:text-green-400 transition">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+
+                    <!-- BOTÃO MODAL -->
+                    <button onclick="abrir()"
+                        class="bg-gradient-to-r from-blue-500 to-blue-900 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition">
+                        +
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- categorias -->
+    <div class="bg-slate-400 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="hidden md:flex space-x-6" id="categoriasnav">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- categorias também -->
+    <section class="flex justify-items-center">
+        <div id="sectionscategorias" class="flex justify-between items-center">
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <div id="overlay" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 px-4">
+
+        <form id="registroForm"
+            class="bg-slate-400 rounded-2xl p-6 md:p-10 w-full max-w-lg md:max-w-3xl max-h-[90vh] overflow-y-auto relative shadow-2xl">
+
+            <button type="button" onclick="fechar()" class="absolute top-4 right-4 text-xl font-bold text-white">
+                ✕
+            </button>
+
+            <h2 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">
+                Adicione uma categoria:
+            </h2>
+
+            <input id="nome" type="text" placeholder="Nome"
+                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
+
+            <input id="descricao" type="text" placeholder="Descrição"
+                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
+
+            <button type="submit" class="w-full bg-blue-950 text-white py-3 rounded-lg font-semibold">
+                Continuar
+            </button>
+
+            <p id="erro" class="text-red-500 mt-2"></p>
+            <p id="resultado" class="text-green-500 mt-2"></p>
+
+        </form>
+
+    </div>
+
+
+
+</body>
+<script src="js/fetchCategorias.js"></script>
+<script src="js/fetchCategorias2.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/cadastroCat.js"></script>
+<script src="js/delete.js"></script>
+
+</html>
