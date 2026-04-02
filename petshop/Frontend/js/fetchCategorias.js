@@ -1,3 +1,11 @@
+
+
+function abrirCategoria(id){
+    window.location.href = `produtos.html?categoria=${id}`
+}
+
+// CATEGORIAS CARD---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 fetch("http://localhost:8080/categorias")
     .then(response => response.json())
     .then(data => {
@@ -5,7 +13,7 @@ fetch("http://localhost:8080/categorias")
 
         data.forEach(categoria => {
             const linha = `
-          <div class="bg-slate-800 p-5 rounded-xl w-72 h-72 mx-5 my-6 border border-slate-700 
+          <div  onclick="abrirCategoria()${categoria.id_categoria}" class="bg-slate-800 p-5 rounded-xl w-72 h-72 mx-5 my-6 border border-slate-700 
             flex flex-col justify-between
             transition-all duration-300 ease-out 
             hover:scale-110 hover:-translate-y-1 hover:shadow-2xl hover:border-blue-500/50">
@@ -49,10 +57,7 @@ fetch("http://localhost:8080/categorias")
 
 
 
-
-
-
-
+// CATEGORIAS NAVBAR---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     fetch("http://localhost:8080/categorias")
     .then(response => response.json())
@@ -65,7 +70,7 @@ fetch("http://localhost:8080/categorias")
             const item = `
                 <button 
                    class="text-blue-900 text-2xl my-2 font-bold transition-all duration-300 ease-out hover:text-white hover:scale-105 hover:-translate-y-0.5"
-                    onclick="filtrarPorCategoria('${categoria.id}')"
+                    onclick="abrirCategoria(${categoria.id_categoria})"
                 >
                     ${categoria.nome}
                 </button>
@@ -77,6 +82,11 @@ fetch("http://localhost:8080/categorias")
     .catch(error => console.error("Erro:", error));
 
 
+
+
+
+
+// CATEGORIAS FOOTER---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     fetch("http://localhost:8080/categorias")
     .then(response => response.json())
     .then(data => {

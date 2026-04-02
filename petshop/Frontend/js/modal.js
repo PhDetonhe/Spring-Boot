@@ -10,3 +10,17 @@ function fechar() {
   overlay.classList.remove("flex");
 }
 
+function abrirProdutos() {
+  const overlay = document.getElementById("overlayP");
+  overlay.classList.remove("hidden");
+  overlay.classList.add("flex");
+}
+
+function fecharProdutos() {
+  const overlay = document.getElementById("overlayP");
+  overlay.classList.remove("hidden");
+  overlay.classList.add("flex");
+}
+
+
+
