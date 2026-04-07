@@ -9,7 +9,6 @@ async function excluir(id_categoria, botao) {
         });
 
         if (response.ok) {
-            // 🔥 remove o card (div)
             const card = botao.closest('div');
             card.remove();
 

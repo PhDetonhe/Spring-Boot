@@ -1,150 +1,101 @@
 package com.pedrodetonhe.petshop.Model;
 
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "produto")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_produto;
+
+    @Column(nullable = false)
     private String nome;
+
     private String descricao;
-    private String Image;
-    private double preco;
-    private double preco_desconto;
-    private int qtnd_estoque;
-    
-    
+
+    @Column(nullable = false)
+    private BigDecimal preco;
+
+    @Column(nullable = false)
+    private BigDecimal preco_desconto;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String imagem;
+
+    private Integer qtd_estoque;
+
+    // RELACIONAMENTO COM CATEGORIA
     @ManyToOne
-    @JoinColumn(name = "id_categoria") // TEM QUE SER IGUAL AO BANCO
+    @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
 
-    
+    // GETTERS E SETTERS
 
-    public Produto(Integer id, String nome, String descricao, String image, double preco, double preco_desconto, int qtnd_estoque, Categoria categoria) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        Image = image;
-        this.preco = preco;
-        this.preco_desconto = preco_desconto;
-        this.qtnd_estoque = qtnd_estoque;
-        this.categoria = categoria;
+    public Integer getId_produto() {
+        return id_produto;
     }
 
-    
-
-    public Produto() {
+    public void setId_produto(Integer id_produto) {
+        this.id_produto = id_produto;
     }
-
-
-
-    public Integer getId() {
-        return id;
-    }
-
-
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
 
     public String getNome() {
         return nome;
     }
 
-
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-
 
     public String getDescricao() {
         return descricao;
     }
 
-
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-
-
-    public String getImage() {
-        return Image;
-    }
-
-
-
-    public void setImage(String image) {
-        Image = image;
-    }
-
-
-
-    public double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-
-
-    public void setPreco(double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
-
-
-    public double getPreco_desconto() {
+    public BigDecimal getPreco_desconto() {
         return preco_desconto;
     }
 
-
-
-    public void setPreco_desconto(double preco_desconto) {
+    public void setPreco_desconto(BigDecimal preco_desconto) {
         this.preco_desconto = preco_desconto;
     }
 
-
-
-    public int getQtnd_estoque() {
-        return qtnd_estoque;
+    public String getImagem() {
+        return imagem;
     }
 
-
-
-    public void setQtnd_estoque(int qtnd_estoque) {
-        this.qtnd_estoque = qtnd_estoque;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
+    public Integer getQtd_estoque() {
+        return qtd_estoque;
+    }
 
+    public void setQtd_estoque(Integer qtd_estoque) {
+        this.qtd_estoque = qtd_estoque;
+    }
 
     public Categoria getCategoria() {
         return categoria;
     }
 
-
-
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
-
-    
-    
-
-    
 }

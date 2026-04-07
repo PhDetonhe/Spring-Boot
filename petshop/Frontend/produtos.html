@@ -1,135 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Produtos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
 
-<body>
-    <!-- barra de nav.-->
+<body class="bg-slate-300">
+
+    <!-- NAV -->
     <nav class="bg-slate-400 shadow-md ">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
 
-                <!-- logo provisorio do petshop -->
-                <div class="text-blue-900 text-3xl font-bold transition-all duration-300 ease-out hover:text-white hover:scale-105 hover:-translate-y-0.5">
+                <div class="text-blue-900 text-3xl font-bold hover:text-white transition">
                     <a href="main.html">PetShop</a>
                 </div>
 
-                <!-- barra de pesquisa-->
                 <div class="hidden md:flex flex-1 mx-6">
                     <input type="text" placeholder="O que seu pet precisa"
                         class="w-96 px-4 py-2 rounded-l-lg outline-none">
-
                     <button class="bg-blue-900 text-white px-4 rounded-r-lg">
                         🔍
                     </button>
                 </div>
 
-                <!-- icones -->
                 <div class="flex items-center gap-4 text-xl">
 
-                    <button title="Login" class="text-2xl text-blue-900 hover:text-white transition">
-                        <i class="fa-solid fa-user"></i>
-                    </button>
-
-                    <button title="Favoritos" class="text-2xl text-blue-900 hover:text-red-400 transition">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-
-                    <button title="Carrinho" class="text-2xl text-blue-900 hover:text-green-400 transition">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </button>
-
-                    <!-- BOTÃO MODAL -->
                     <button onclick="abrirProdutos()"
-                        class="bg-gradient-to-r from-blue-500 to-blue-900 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition">
+                        class="bg-gradient-to-r from-blue-500 to-blue-900 text-white px-4 py-2 rounded-xl shadow">
                         +
                     </button>
+
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- categorias -->
-    <div class="bg-slate-400 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="hidden md:flex space-x-6" id="categoriasnav">
-
-            </div>
-        </div>
-    </div>
-
-
-    <section class="flex flex-wrap justify-items-center">
-        <div id="sectionsprodutos" class="flex flex-wrap justify-center">
-
-        </div>
+    <section class="flex flex-wrap justify-center p-6">
+        <div id="sectionsprodutos" class="flex flex-wrap justify-center gap-6"></div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="overlayP" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 px-4">
+    <div id="overlayP"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 px-4">
 
         <form id="registroForm"
-            class="bg-slate-400 rounded-2xl p-6 md:p-10 w-full max-w-lg md:max-w-3xl max-h-[90vh] overflow-y-auto relative shadow-2xl">
+            class="bg-slate-400 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl">
 
-            <button type="button" onclick="fecharProdutos()" class="absolute top-4 right-4 text-xl font-bold text-white">
+            <button type="button" onclick="fecharProdutos()"
+                class="absolute top-4 right-4 text-xl font-bold text-white">
                 ✕
             </button>
 
-            <h2 class="text-xl md:text-2xl font-bold text-center mb-2 text-white">
+            <h2 class="text-xl font-bold text-center mb-2 text-white">
                 Adicione um produto:
             </h2>
 
@@ -139,123 +65,33 @@
             <input id="descricao" type="text" placeholder="Descrição"
                 class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
 
-            <input id="preco" type="text" placeholder="preco"
+            <input id="preco" type="number" placeholder="Preço"
                 class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
 
-            <input id="preco_desconto" type="text" placeholder="preco_desconto"
+            <input id="preco_desconto" type="number" placeholder="Preço com desconto"
                 class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
 
-            <input id="qtnd_estoque" type="text" placeholder="qtnd_estoque"
+            <input id="qtd_estoque" type="number" placeholder="Quantidade em estoque"
                 class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
 
-            <input id="categoria" type="text" placeholder="categoria"
+            <input id="categoria" type="number" placeholder="ID da categoria"
                 class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
 
-             <div class="fotoContainer">
-                    <label for="foto">Foto de perfil</label>
-                    <input type="file" id="Image" accept="image/*">
-                    <img id="preview" class="previewFoto" src="" alt="">
-                </div>
-
-            
-
-            <button type="submit" class="w-full bg-blue-950 text-white py-3 rounded-lg font-semibold">
+            <button type="submit"
+                class="w-full bg-blue-950 text-white py-3 rounded-lg font-semibold">
                 Continuar
             </button>
 
-            <p id="erro" class="text-red-500 mt-2"></p>
-            <p id="resultado" class="text-green-500 mt-2"></p>
+            
+
+<p id="erro" class="text-red-500 mt-2"></p>
+<p id="resultado" class="text-green-500 mt-2"></p>
 
         </form>
-
     </div>
 
+    <script src="js/modal.js"></script>
+    <script src="js/fetchProdutos.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer class="bg-slate-600 py-8 text-white">
-
-        <div class="max-w-7xl mx-auto px-4">
-
-            <!-- inicio grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-
-                <!-- categorias -->
-                <div>
-                    <h2 class="mb-4 text-lg font-semibold">Categorias</h2>
-                    <ul id="catfooter" class="text-sm">
-                    </ul>
-                </div>
-                <!-- categorias -->
-
-                <!-- zona das redes -->
-                <div>
-                    <h2 class="mb-4 text-lg font-semibold">Redes Sociais</h2>
-
-                    <div class="flex justify-center md:justify-start gap-4 text-xl">
-
-                        <a href="#" class="hover:text-blue-400 transition">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-
-                        <a href="#" class="hover:text-pink-400 transition">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-
-                        <a href="#" class="hover:text-sky-400 transition">
-                            <i class="fa-brands fa-twitter"></i>
-                        </a>
-
-                        <a href="#" class="hover:text-red-500 transition">
-                            <i class="fa-brands fa-youtube"></i>
-                        </a>
-
-                    </div>
-                </div>
-                <!-- zona das redes -->
-
-            </div>
-            <!-- ifm do grid -->
-
-            <!-- linhas -->
-            <hr class="my-6 border-slate-400">
-            <!-- linhas -->
-
-            <!-- Copyright -->
-            <p class="text-xs text-center">
-                © 2026 Curso Tailwind. Todos os direitos reservados. Fisia Comércio de Produtos Pet Ltda - CNPJ:
-                59.546.515/0045-55 Rodovia Fernão Dias, S/N Km 947.5 - Galpão Modulo 3640 - CEP 37640-903 - Extrema - MG
-            </p>
-            <!-- Copyright -->
-
-        </div>
-    </footer>
 </body>
-<script src="js/fetchProdutos.js"></script>
-<script src="js/modal.js"></script>
-<script src="js/cadastroCat.js"></script>
-<script src="js/delete.js"></script>
-
 </html>

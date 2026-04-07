@@ -42,3 +42,8 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         document.getElementById('resultado').textContent = '';
     }
 });
+
+
+
+
+

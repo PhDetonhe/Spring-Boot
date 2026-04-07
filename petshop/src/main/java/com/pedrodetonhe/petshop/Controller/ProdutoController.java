@@ -1,16 +1,14 @@
 package com.pedrodetonhe.petshop.Controller;
 
-
 import com.pedrodetonhe.petshop.Model.Produto;
 import com.pedrodetonhe.petshop.Service.ProdutoService;
-
 import org.springframework.web.bind.annotation.*;
 
-
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
+@CrossOrigin("*")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
@@ -19,28 +17,37 @@ public class ProdutoController {
         this.produtoService = produtoService;
     }
 
-    @PostMapping("/categoria/{id_categoria}")
-    public Produto adicionarProduto(
-            @PathVariable Integer id_categoria,
-            @RequestBody Produto produto) {
-
-        return produtoService.adicionarProduto(id_categoria, produto);
+    // GET TODOS
+    @GetMapping
+    public List<Produto> listar() {
+        return produtoService.listarTodos();
     }
 
-    @GetMapping("/{id}")//get por id pra update exibir os dados do produto
-    public Produto ListId(@PathVariable Integer id) {
-        return produtoService.ListId(id);
+    // GET POR ID
+    @GetMapping("/{id}")
+    public Produto buscar(@PathVariable Integer id) {
+        return produtoService.buscarPorId(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    @PutMapping("/{id}")
-    public Produto updateProduto(@PathVariable Integer id, @RequestBody Produto produto) {
-        return produtoService.updateProduto(id, produto);
+    // POST
+    @PostMapping("/{idCategoria}")
+    public Produto criar(@RequestBody Produto produto,
+                         @PathVariable Integer idCategoria) {
+        return produtoService.salvar(produto, idCategoria);
     }
-    
+
+    // PUT
+    @PutMapping("/{id}/{idCategoria}")
+    public Produto atualizar(@PathVariable Integer id,
+                             @RequestBody Produto produto,
+                             @PathVariable Integer idCategoria) {
+        return produtoService.atualizar(id, produto, idCategoria);
+    }
+
+    // DELETE
     @DeleteMapping("/{id}")
-    public void deleteProduto(@PathVariable Integer id){
-        produtoService.deleteProduto(id);
+    public void deletar(@PathVariable Integer id) {
+        produtoService.deletar(id);
     }
-    
-
 }
