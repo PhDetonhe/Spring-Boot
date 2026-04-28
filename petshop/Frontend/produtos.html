@@ -1,97 +1,192 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Produtos — PetShop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'Georgia', 'serif'],
+                        body:    ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream:       '#FDF6EC',
+                        'warm-white':'#FEFAF4',
+                        teal: {
+                            DEFAULT: '#1A7A6E',
+                            light:   '#2A9D8F',
+                            dark:    '#0D5C52',
+                        },
+                        amber: {
+                            DEFAULT: '#E9A84C',
+                            light:   '#F4C07A',
+                        },
+                        charcoal:    '#1C2321',
+                        border:      '#E2D9CC',
+                        muted:       '#8A8F8D',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%':   { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)'    },
+                        },
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.25s ease forwards',
+                    },
+                },
+            },
+        }
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
-
-<body class="bg-slate-300">
-
+ 
+<body class="bg-cream font-body text-charcoal min-h-screen flex flex-col">
+ 
     <!-- NAV -->
-    <nav class="bg-slate-400 shadow-md ">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-
-                <div class="text-blue-900 text-3xl font-bold hover:text-white transition">
-                    <a href="main.html">PetShop</a>
+    <nav class="bg-warm-white border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between gap-6">
+ 
+            <a href="main.html" class="flex items-center gap-2 group no-underline">
+                <div class="w-10 h-10 bg-teal rounded-full flex items-center justify-center text-white text-lg flex-shrink-0">
+                    <i class="fa-solid fa-paw"></i>
                 </div>
-
-                <div class="hidden md:flex flex-1 mx-6">
-                    <input type="text" placeholder="O que seu pet precisa"
-                        class="w-96 px-4 py-2 rounded-l-lg outline-none">
-                    <button class="bg-blue-900 text-white px-4 rounded-r-lg">
-                        🔍
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-4 text-xl">
-
-                    <button onclick="abrirProdutos()"
-                        class="bg-gradient-to-r from-blue-500 to-blue-900 text-white px-4 py-2 rounded-xl shadow">
-                        +
-                    </button>
-
-                </div>
+                <span class="font-display text-2xl font-black text-charcoal group-hover:text-teal transition-colors">PetShop</span>
+            </a>
+ 
+            <div class="hidden md:flex flex-1 max-w-lg border-[1.5px] border-border rounded-full overflow-hidden focus-within:border-teal-light focus-within:ring-2 focus-within:ring-teal-light/20 transition-all">
+                <input type="text" placeholder="Buscar produtos..."
+                    class="flex-1 px-5 py-2.5 bg-transparent outline-none text-sm text-charcoal placeholder-muted font-body">
+                <button class="bg-teal hover:bg-teal-dark px-5 text-white text-sm transition-colors">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
+ 
+            <button onclick="abrirProdutos()"
+                class="flex items-center gap-1.5 bg-teal hover:bg-teal-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-all hover:-translate-y-0.5">
+                <i class="fa-solid fa-plus text-xs"></i> Novo produto
+            </button>
         </div>
     </nav>
-
-    <section class="flex flex-wrap justify-center p-6">
-        <div id="sectionsprodutos" class="flex flex-wrap justify-center gap-6"></div>
-    </section>
-
-    <div id="overlayP"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 px-4">
-
-        <form id="registroForm"
-            class="bg-slate-400 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-2xl">
-
+ 
+    <!-- PRODUCTS -->
+    <main class="flex-1">
+        <div class="max-w-7xl mx-auto px-6 pt-10 pb-4">
+            <h2 class="font-display text-3xl font-bold text-charcoal">Produtos</h2>
+            <div class="mt-1.5 w-10 h-[3px] bg-amber rounded-full"></div>
+        </div>
+ 
+        <div class="max-w-7xl mx-auto px-6 pb-16">
+            <div id="sectionsprodutos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"></div>
+        </div>
+    </main>
+ 
+    <!-- MODAL PRODUTO -->
+    <div id="overlayP" class="fixed inset-0 bg-charcoal/60 backdrop-blur-sm hidden items-center justify-center z-[200] px-4">
+        <div class="bg-white rounded-2xl p-8 w-full max-w-md relative shadow-[0_30px_80px_rgba(0,0,0,0.25)] animate-slide-up max-h-[90vh] overflow-y-auto">
+ 
             <button type="button" onclick="fecharProdutos()"
-                class="absolute top-4 right-4 text-xl font-bold text-white">
-                ✕
+                class="absolute top-5 right-5 w-8 h-8 rounded-full bg-cream hover:bg-border flex items-center justify-center text-sm transition-colors">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-
-            <h2 class="text-xl font-bold text-center mb-2 text-white">
-                Adicione um produto:
-            </h2>
-
-            <input id="nome" type="text" placeholder="Nome"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <input id="descricao" type="text" placeholder="Descrição"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <input id="preco" type="number" placeholder="Preço"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <input id="preco_desconto" type="number" placeholder="Preço com desconto"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <input id="qtd_estoque" type="number" placeholder="Quantidade em estoque"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <input id="categoria" type="number" placeholder="ID da categoria"
-                class="w-full mb-3 p-3 border rounded-lg bg-white text-black">
-
-            <button type="submit"
-                class="w-full bg-blue-950 text-white py-3 rounded-lg font-semibold">
-                Continuar
-            </button>
-
-            
-
-<p id="erro" class="text-red-500 mt-2"></p>
-<p id="resultado" class="text-green-500 mt-2"></p>
-
-        </form>
+ 
+            <h2 class="font-display text-2xl font-bold text-charcoal mb-1">Novo produto</h2>
+            <p class="text-muted text-sm mb-7">Preencha os dados para adicionar um produto.</p>
+ 
+            <form id="registroForm" class="space-y-4">
+ 
+                <div>
+                    <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Nome</label>
+                    <input id="nome" type="text" placeholder="Nome do produto"
+                        class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                </div>
+ 
+                <div>
+                    <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Descrição</label>
+                    <input id="descricao" type="text" placeholder="Descrição..."
+                        class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                </div>
+ 
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Preço</label>
+                        <input id="preco" type="number" placeholder="0,00"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Preço c/ desconto</label>
+                        <input id="preco_desconto" type="number" placeholder="0,00"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                </div>
+ 
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Estoque</label>
+                        <input id="qtd_estoque" type="number" placeholder="0"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">ID da categoria</label>
+                        <input id="categoria" type="number" placeholder="1"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                </div>
+ 
+                <button type="submit"
+                    class="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3.5 rounded-xl transition-all hover:-translate-y-0.5 mt-1">
+                    Salvar produto
+                </button>
+            </form>
+ 
+            <p id="erro"      class="text-red-500 text-sm mt-3"></p>
+            <p id="resultado" class="text-teal    text-sm mt-3"></p>
+        </div>
     </div>
-
+ 
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-white/70 py-14">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+ 
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-teal rounded-full flex items-center justify-center text-white text-sm"><i class="fa-solid fa-paw"></i></div>
+                        <span class="font-display text-lg font-bold text-white">PetShop</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">Cuidado, amor e os melhores produtos para o seu animal de estimação.</p>
+                </div>
+ 
+                <div>
+                    <h3 class="text-[11px] font-semibold uppercase text-white mb-4">Categorias</h3>
+                    <ul id="catfooter" class="space-y-2 text-sm"></ul>
+                </div>
+ 
+                <div>
+                    <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">Redes Sociais</h3>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+ 
+            <hr class="border-white/10 mb-6">
+            <p class="text-xs text-white/35 text-center">
+                © 2026 PetShop. Todos os direitos reservados. Fisia Comércio de Produtos Pet Ltda — CNPJ: 59.546.515/0045-55 — Rodovia Fernão Dias, S/N Km 947.5 — CEP 37640-903 — Extrema/MG
+            </p>
+        </div>
+    </footer>
+ 
     <script src="js/modal.js"></script>
     <script src="js/fetchProdutos.js"></script>
-
+ 
 </body>
 </html>
