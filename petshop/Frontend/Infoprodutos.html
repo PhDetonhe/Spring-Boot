@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'Georgia', 'serif'],
+                        body:    ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream:       '#FDF6EC',
+                        'warm-white':'#FEFAF4',
+                        teal: {
+                            DEFAULT: '#1A7A6E',
+                            light:   '#2A9D8F',
+                            dark:    '#0D5C52',
+                        },
+                        amber: {
+                            DEFAULT: '#E9A84C',
+                            light:   '#F4C07A',
+                        },
+                        charcoal:    '#1C2321',
+                        border:      '#E2D9CC',
+                        muted:       '#8A8F8D',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%':   { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)'    },
+                        },
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.25s ease forwards',
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+<body>
+    <nav class="bg-warm-white border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between gap-6">
+
+            <a href="main.html" class="flex items-center gap-2 group no-underline">
+                <div class="w-10 h-10 bg-teal rounded-full flex items-center justify-center text-white text-lg flex-shrink-0">
+                    <i class="fa-solid fa-paw"></i>
+                </div>
+                <span class="font-display text-2xl font-black text-charcoal group-hover:text-teal transition-colors">PetShop</span>
+            </a>
+
+            <div class="hidden md:flex flex-1 max-w-lg border-[1.5px] border-border rounded-full overflow-hidden focus-within:border-teal-light focus-within:ring-2 focus-within:ring-teal-light/20 transition-all">
+                <input type="text" placeholder="O que seu pet precisa hoje?"
+                    class="flex-1 px-5 py-2.5 bg-transparent outline-none text-sm text-charcoal placeholder-muted font-body">
+                <button class="bg-teal hover:bg-teal-dark px-5 text-white text-sm transition-colors">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <button title="Login"    class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-teal transition-all"><i class="fa-solid fa-user"></i></button>
+                <button title="Favoritos" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-red-400 transition-all"><i class="fa-solid fa-heart"></i></button>
+                <button title="Carrinho"  class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-amber transition-all"><i class="fa-solid fa-cart-shopping"></i></button>
+                <button onclick="abrir()"
+                    class="ml-2 flex items-center gap-1.5 bg-teal hover:bg-teal-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-all hover:-translate-y-0.5">
+                    <i class="fa-solid fa-plus text-xs"></i> Nova categoria
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CATEGORIES BAR -->
+    <div class="bg-teal overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-6 flex" id="categoriasnav"></div>
+    </div>
+
+    <!-- MAIN -->
+<main class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10">
+
+<!-- IMAGEM -->
+<div>
+<div class="bg-warm border rounded-xl flex items-center justify-center aspect-square">
+<img id="img" class="object-contain p-6">
+</div>
+</div>
+
+<!-- INFO -->
+<div class="flex flex-col gap-4">
+
+<span id="categoria" class="text-xs text-teal font-semibold"></span>
+
+<h1 id="nome" class="font-display text-3xl font-bold"></h1>
+
+<p id="preco" class="text-3xl font-bold"></p>
+
+<p id="descricao" class="text-sm text-muted"></p>
+
+<!-- QUANTIDADE -->
+<div class="flex items-center gap-3">
+<button onclick="qtd(-1)">-</button>
+<input id="q" type="number" value="1" class="w-12 text-center border">
+<button onclick="qtd(1)">+</button>
+</div>
+
+<!-- BOTÕES -->
+<div class="flex gap-3">
+<button class="flex-1 bg-teal text-white py-3 rounded-lg">
+<i class="fa-solid fa-cart-shopping"></i> Carrinho
+</button>
+<button class="w-12 border rounded-lg">
+<i class="fa-regular fa-heart"></i>
+</button>
+</div>
+
+<button class="bg-amber py-3 rounded-lg font-bold">
+Comprar agora
+</button>
+
+</div>
+
+        <!-- FOOTER -->
+    <footer class="bg-charcoal text-white/70 py-14">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-teal rounded-full flex items-center justify-center text-white text-sm"><i class="fa-solid fa-paw"></i></div>
+                        <span class="font-display text-lg font-bold text-white">PetShop</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">Cuidado, amor e os melhores produtos para o seu animal de estimação.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">Categorias</h3>
+                    <ul id="catfooter" class="space-y-2 text-sm"></ul>
+                </div>
+
+                <div>
+                    <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">Redes Sociais</h3>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-white/10 mb-6">
+            <p class="text-xs text-white/35 text-center">
+                © 2026 PetShop. Todos os direitos reservados. Fisia Comércio de Produtos Pet Ltda — CNPJ: 59.546.515/0045-55 — Rodovia Fernão Dias, S/N Km 947.5 — CEP 37640-903 — Extrema/MG
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/Info.js"></script>
+</body>
+</html>
