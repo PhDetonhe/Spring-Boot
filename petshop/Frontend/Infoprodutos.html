@@ -80,85 +80,105 @@
         <div class="max-w-7xl mx-auto px-6 flex" id="categoriasnav"></div>
     </div>
 
-    <!-- MAIN -->
+<!-- MAIN -->
 <main class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10">
 
-<!-- IMAGEM -->
-<div>
-<div class="bg-warm border rounded-xl flex items-center justify-center aspect-square">
-<img id="img" class="object-contain p-6">
-</div>
-</div>
+    <!-- IMAGEM -->
+    <div>
+        <div class="bg-warm border rounded-xl flex items-center justify-center aspect-square">
+            <img id="img" class="object-contain p-6">
+        </div>
+    </div>
 
-<!-- INFO -->
-<div class="flex flex-col gap-4">
+    <!-- INFO -->
+    <div class="flex flex-col gap-4">
 
-<span id="categoria" class="text-xs text-teal font-semibold"></span>
+        <span id="categoria" class="text-xs text-teal font-semibold"></span>
 
-<h1 id="nome" class="font-display text-3xl font-bold"></h1>
+        <h1 id="nome" class="font-display text-3xl font-bold"></h1>
 
-<p id="preco" class="text-3xl font-bold"></p>
+        <p id="preco" class="text-3xl font-bold"></p>
 
-<p id="descricao" class="text-sm text-muted"></p>
+        <p id="descricao" class="text-sm text-muted"></p>
 
-<!-- QUANTIDADE -->
-<div class="flex items-center gap-3">
-<button onclick="qtd(-1)">-</button>
-<input id="q" type="number" value="1" class="w-12 text-center border">
-<button onclick="qtd(1)">+</button>
-</div>
+        <!-- QUANTIDADE -->
+        <div class="flex items-center gap-3">
+            <button onclick="qtd(-1)">-</button>
+            <input id="q" type="number" value="1" class="w-12 text-center border">
+            <button onclick="qtd(1)">+</button>
+        </div>
 
-<!-- BOTÕES -->
-<div class="flex gap-3">
-<button class="flex-1 bg-teal text-white py-3 rounded-lg">
-<i class="fa-solid fa-cart-shopping"></i> Carrinho
-</button>
-<button class="w-12 border rounded-lg">
-<i class="fa-regular fa-heart"></i>
-</button>
-</div>
+        <!-- BOTÕES -->
+        <div class="flex gap-3">
+            <button class="flex-1 bg-teal text-white py-3 rounded-lg">
+                <i class="fa-solid fa-cart-shopping"></i> Carrinho
+            </button>
+            <button class="w-12 border rounded-lg">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+        </div>
 
-<button class="bg-amber py-3 rounded-lg font-bold">
-Comprar agora
-</button>
+        <button class="bg-amber py-3 rounded-lg font-bold">
+            Comprar agora
+        </button>
 
-</div>
+    </div>
 
-        <!-- FOOTER -->
-    <footer class="bg-charcoal text-white/70 py-14">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+</main> <!-- 👈 FECHAMENTO QUE FALTAVA -->
 
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-teal rounded-full flex items-center justify-center text-white text-sm"><i class="fa-solid fa-paw"></i></div>
-                        <span class="font-display text-lg font-bold text-white">PetShop</span>
+<!-- FOOTER -->
+<footer class="bg-charcoal text-white/70 py-14">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-teal rounded-full flex items-center justify-center text-white text-sm">
+                        <i class="fa-solid fa-paw"></i>
                     </div>
-                    <p class="text-sm leading-relaxed">Cuidado, amor e os melhores produtos para o seu animal de estimação.</p>
+                    <span class="font-display text-lg font-bold text-white">PetShop</span>
                 </div>
+                <p class="text-sm leading-relaxed">
+                    Cuidado, amor e os melhores produtos para o seu animal de estimação.
+                </p>
+            </div>
 
-                <div>
-                    <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">Categorias</h3>
-                    <ul id="catfooter" class="space-y-2 text-sm"></ul>
-                </div>
+            <div>
+                <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">
+                    Categorias
+                </h3>
+                <ul id="catfooter" class="space-y-2 text-sm"></ul>
+            </div>
 
-                <div>
-                    <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">Redes Sociais</h3>
-                    <div class="flex gap-3">
-                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all"><i class="fa-brands fa-youtube"></i></a>
-                    </div>
+            <div>
+                <h3 class="text-[11px] font-semibold tracking-[0.1em] uppercase text-white mb-4">
+                    Redes Sociais
+                </h3>
+                <div class="flex gap-3">
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-teal text-white/70 hover:text-white rounded-lg flex items-center justify-center transition-all">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
                 </div>
             </div>
 
-            <hr class="border-white/10 mb-6">
-            <p class="text-xs text-white/35 text-center">
-                © 2026 PetShop. Todos os direitos reservados. Fisia Comércio de Produtos Pet Ltda — CNPJ: 59.546.515/0045-55 — Rodovia Fernão Dias, S/N Km 947.5 — CEP 37640-903 — Extrema/MG
-            </p>
         </div>
-    </footer>
+
+        <hr class="border-white/10 mb-6">
+
+        <p class="text-xs text-white/35 text-center">
+            © 2026 PetShop. Todos os direitos reservados. Fisia Comércio de Produtos Pet Ltda — CNPJ: 59.546.515/0045-55 — Rodovia Fernão Dias, S/N Km 947.5 — CEP 37640-903 — Extrema/MG
+        </p>
+    </div>
+</footer>
 
     <script src="js/Info.js"></script>
 </body>

@@ -58,7 +58,7 @@ if (!categoriaId) {
                         </p>
 
                         <div class="flex justify-end mt-3">
-           <a href="Infoprodutos.html?id=${produto.id_produto}">
+                      <a href="Infoprodutos.html?id=${produto.id_produto}">
         <button class="bg-green-500 p-3 rounded-full text-white hover:bg-green-600">
             🛒
         </button>
