@@ -5,6 +5,7 @@ import com.pedrodetonhe.petshop.DTO.LoginRequest;
 import com.pedrodetonhe.petshop.DTO.RegisterRequest;
 import com.pedrodetonhe.petshop.Service.UsuarioService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,10 +19,18 @@ public class AuthController {
         this.usuarioService = usuarioService;
     }
 
-    // POST /auth/cadastro
+    // POST /auth/cadastro — cadastro público, sempre cria USER
     @PostMapping("/cadastro")
     public ResponseEntity<AuthResponse> cadastrar(@RequestBody RegisterRequest request) {
         AuthResponse response = usuarioService.cadastrar(request);
+        return ResponseEntity.ok(response);
+    }
+
+    // POST /auth/cadastro/admin — apenas ADMIN autenticado pode criar outro ADMIN
+    @PostMapping("/cadastro/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<AuthResponse> cadastrarAdmin(@RequestBody RegisterRequest request) {
+        AuthResponse response = usuarioService.cadastrarAdmin(request);
         return ResponseEntity.ok(response);
     }
 

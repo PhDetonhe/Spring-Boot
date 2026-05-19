@@ -26,7 +26,7 @@ public class UsuarioService {
         this.jwtUtil = jwtUtil;
     }
 
-    // ==================== CADASTRO ====================
+    // ==================== CADASTRO (USER) ====================
     public AuthResponse cadastrar(RegisterRequest request) {
         if (repository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("E-mail já cadastrado!");
@@ -35,12 +35,32 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
-        usuario.setSenha(passwordEncoder.encode(request.getSenha())); // Senha criptografada
+        usuario.setSenha(passwordEncoder.encode(request.getSenha()));
 
-        // Se não informar role, default é USER
-        usuario.setRole(request.getRole() != null ? request.getRole() : Usuario.Role.USER);
+        // FIX: cadastro público sempre cria USER, independente do que vier no request
+        usuario.setRole(Usuario.Role.USER);
 
-        repository.save(usuario);
+        // FIX: captura o retorno do save para garantir que o objeto persistido (com ID) seja usado
+        usuario = repository.save(usuario);
+
+        String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
+        return new AuthResponse(token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
+    }
+
+    // ==================== CADASTRO ADMIN (apenas ADMIN pode chamar) ====================
+    public AuthResponse cadastrarAdmin(RegisterRequest request) {
+        if (repository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("E-mail já cadastrado!");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNome(request.getNome());
+        usuario.setEmail(request.getEmail());
+        usuario.setSenha(passwordEncoder.encode(request.getSenha()));
+        usuario.setRole(Usuario.Role.ADMIN);
+
+        // FIX: captura o retorno do save
+        usuario = repository.save(usuario);
 
         String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
         return new AuthResponse(token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
@@ -82,7 +102,6 @@ public class UsuarioService {
             usuario.setSenha(passwordEncoder.encode(request.getSenha()));
         }
 
-        // Só ADMIN pode mudar role — o controller deve validar isso separadamente
         if (request.getRole() != null) {
             usuario.setRole(request.getRole());
         }
