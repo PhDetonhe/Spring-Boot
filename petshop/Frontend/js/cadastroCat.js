@@ -1,49 +1,48 @@
-document.getElementById('registroForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("categoriaForm");
+    if (!form) return;
 
-    function redirecionarUsuarios() {
-        window.location.href = "main.html";
-    }
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-    const nome = document.getElementById('nome').value;
-    const descricao = document.getElementById('descricao').value;
+        const nome = document.getElementById("categoriaNome").value.trim();
+        const descricao = document.getElementById("categoriaDescricao").value.trim();
+        const erro = document.getElementById("categoriaErro");
+        const resultado = document.getElementById("categoriaResultado");
 
-    try {
-        const response = await fetch('http://localhost:8080/categorias', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                nome: nome,
-                descricao: descricao,
-                ativo: true 
-            })
-        });
+        erro.textContent = "";
+        resultado.textContent = "";
 
-        if (!response.ok) {
-            throw new Error('Erro na requisição: ' + response.status);
+        if (!PetAuth.isAdmin()) {
+            erro.textContent = "Apenas administradores podem cadastrar categorias.";
+            return;
         }
 
-        const data = await response.json();
+        if (!nome) {
+            erro.textContent = "Preencha o nome da categoria.";
+            return;
+        }
 
-        console.log("Resposta do backend:", data); 
+        try {
+            const response = await fetch("http://localhost:8080/categorias", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...PetAuth.getAuthHeaders()
+                },
+                body: JSON.stringify({ nome, descricao, ativo: true })
+            });
 
-        
-        document.getElementById('resultado').textContent = 'Categoria cadastrada com sucesso!';
-        document.getElementById('erro').textContent = '';
+            if (!response.ok) {
+                throw new Error(PetAuth.authErrorMessage(response.status));
+            }
 
-        setTimeout(redirecionarUsuarios, 1000);
-
-    } catch (err) {
-        console.error(err); 
-
-        document.getElementById('erro').textContent = 'Erro: ' + err.message;
-        document.getElementById('resultado').textContent = '';
-    }
+            resultado.textContent = "Categoria cadastrada com sucesso!";
+            form.reset();
+            fechar();
+            carregarCategorias();
+        } catch (err) {
+            erro.textContent = err.message || "Erro ao cadastrar categoria.";
+        }
+    });
 });
-
-
-
-
-

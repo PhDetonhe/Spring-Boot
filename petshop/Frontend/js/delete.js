@@ -1,24 +1,26 @@
-async function excluir(id_categoria, botao) {
-    if (!confirm('Tem certeza que deseja excluir esta categoria?')) {
+async function excluir(id_categoria) {
+    if (!PetAuth.isAdmin()) {
+        alert("Apenas administradores podem excluir categorias.");
+        return;
+    }
+
+    if (!confirm("Tem certeza que deseja excluir esta categoria?")) {
         return;
     }
 
     try {
         const response = await fetch(`http://localhost:8080/categorias/${id_categoria}`, {
-            method: 'DELETE'
+            method: "DELETE",
+            headers: PetAuth.getAuthHeaders()
         });
 
-        if (response.ok) {
-            const card = botao.closest('div');
-            card.remove();
-
-            alert('Categoria excluída com sucesso!');
-        } else {
-            const error = await response.text();
-            alert(`Erro ao excluir categoria: ${error}`);
+        if (!response.ok) {
+            throw new Error(PetAuth.authErrorMessage(response.status));
         }
+
+        alert("Categoria excluida com sucesso!");
+        carregarCategorias();
     } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao conectar com o servidor');
+        alert(error.message || "Erro ao conectar com o servidor.");
     }
 }
