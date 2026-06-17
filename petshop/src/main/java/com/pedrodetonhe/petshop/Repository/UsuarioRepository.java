@@ -9,5 +9,5 @@ import com.pedrodetonhe.petshop.Model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Optional<Usuario> findByEmail(String email);
     boolean existsByEmail(String email);
-
+    long countByRole(Usuario.Role role);
 }

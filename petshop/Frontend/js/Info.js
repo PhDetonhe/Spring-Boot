@@ -13,7 +13,7 @@ function preencherProduto(produto) {
     document.getElementById("nome").textContent = produto.nome;
     document.getElementById("preco").textContent = "R$ " + Number(produto.preco_desconto || produto.preco).toFixed(2);
     document.getElementById("descricao").textContent = produto.descricao || "Sem descricao";
-    document.getElementById("img").src = produto.imagem || "https://via.placeholder.com/300";
+    document.getElementById("img").src = PetImages.productImageSrc(produto.imagem);
     document.getElementById("img").alt = produto.nome;
     document.getElementById("categoria").textContent = produto.categoria?.nome || "Sem categoria";
 }

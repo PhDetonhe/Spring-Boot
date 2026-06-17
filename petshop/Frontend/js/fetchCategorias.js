@@ -5,12 +5,12 @@ function abrirCategoria(id) {
 function categoriaCard(categoria) {
     const adminActions = PetAuth.isAdmin() ? `
         <div class="flex justify-between items-center mt-4">
-            <button onclick="event.stopPropagation(); alert('Edicao de categoria ainda nao foi implementada.')"
+            <button onclick="event.stopPropagation(); editarCategoria(${categoria.id_categoria})"
                 class="flex items-center gap-1 text-xs bg-blue-500/10 text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-500/20 transition">
                 <i class="fa-solid fa-pen"></i>
                 Editar
             </button>
-            <button onclick="event.stopPropagation(); excluir(${categoria.id_categoria}, this)"
+            <button onclick="event.stopPropagation(); deletarCategoria(${categoria.id_categoria})"
                 class="flex items-center gap-1 text-xs bg-red-500/10 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-500/20 transition">
                 <i class="fa-solid fa-trash"></i>
                 Excluir

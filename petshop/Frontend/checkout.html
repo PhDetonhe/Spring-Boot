@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Pedido - PetShop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'Georgia', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#FDF6EC',
+                        'warm-white': '#FEFAF4',
+                        teal: {
+                            DEFAULT: '#1A7A6E',
+                            light: '#2A9D8F',
+                            dark: '#0D5C52',
+                        },
+                        amber: {
+                            DEFAULT: '#E9A84C',
+                            light: '#F4C07A',
+                        },
+                        charcoal: '#1C2321',
+                        border: '#E2D9CC',
+                        muted: '#8A8F8D',
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+
+<body class="bg-cream font-body text-charcoal">
+    <nav class="bg-warm-white border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between gap-6">
+            <a href="main.html" class="flex items-center gap-2 group no-underline">
+                <div class="w-10 h-10 bg-teal rounded-full flex items-center justify-center text-white text-lg flex-shrink-0">
+                    <i class="fa-solid fa-paw"></i>
+                </div>
+                <span class="font-display text-2xl font-black text-charcoal group-hover:text-teal transition-colors">PetShop</span>
+            </a>
+            <div class="flex items-center gap-1">
+                <div data-auth-area class="flex items-center gap-1"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Confirmação -->
+            <div class="md:col-span-2">
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-border">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-teal/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-check text-3xl text-teal"></i>
+                        </div>
+                        <h1 class="font-display text-3xl font-bold text-charcoal mb-2">Pedido Confirmado!</h1>
+                        <p class="text-muted">Seu pedido foi recebido e está sendo processado.</p>
+                    </div>
+
+                    <div class="border-t border-b border-border py-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-muted">Número do Pedido:</span>
+                            <span id="pedidoId" class="font-semibold text-charcoal">#---</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-muted">Data:</span>
+                            <span id="dataPedido" class="font-semibold text-charcoal">---</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h2 class="font-semibold text-charcoal mb-4">Itens do Pedido</h2>
+                        <div id="itensList" class="space-y-3">
+                            <!-- Items carregados via JS -->
+                        </div>
+                    </div>
+
+                    <div class="bg-cream/50 rounded-xl p-6">
+                        <h3 class="font-semibold text-charcoal mb-4">Próximos Passos</h3>
+                        <ol class="space-y-2 text-sm">
+                            <li class="flex gap-3">
+                                <span class="font-bold text-teal">1.</span>
+                                <span>Você receberá um e-mail de confirmação em breve</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="font-bold text-teal">2.</span>
+                                <span>Acompanhe o status do seu pedido na página de pedidos</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="font-bold text-teal">3.</span>
+                                <span>Seu pedido será entregue no endereço informado</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumo Financeiro -->
+            <div class="md:col-span-1">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-border sticky top-24">
+                    <h3 class="font-semibold text-charcoal mb-4">Resumo do Pedido</h3>
+                    
+                    <div class="space-y-3 border-b border-border pb-4 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-muted">Subtotal:</span>
+                            <span id="subtotal">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-muted">Frete:</span>
+                            <span class="text-teal-light">Grátis</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mb-6">
+                        <span class="font-semibold text-charcoal">Total:</span>
+                        <span id="total" class="font-bold text-2xl text-teal">R$ 0,00</span>
+                    </div>
+
+                    <button onclick="window.location.href='main.html'" 
+                        class="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3 rounded-xl transition-all hover:-translate-y-0.5">
+                        Continuar Comprando
+                    </button>
+
+                    <button id="cancelBtn" onclick="cancelarPedido()" 
+                        class="w-full mt-3 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-xl transition-all hover:-translate-y-0.5">
+                        Cancelar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Função para formatar moeda
+        function formatarMoeda(valor) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(valor);
+        }
+
+        // Obter ID do pedido da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const pedidoId = urlParams.get('pedidoId');
+
+        // Cancelar pedido
+        async function cancelarPedido() {
+            if (!confirm('Tem certeza que deseja cancelar este pedido?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8080/pedidos/cancelar/${pedidoId}`, {
+                    method: "PUT",
+                    headers: {
+                        ...PetAuth.getAuthHeaders()
+                    }
+                });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(text || 'Erro ao cancelar pedido');
+                }
+
+                alert('Pedido cancelado com sucesso!');
+                window.location.href = 'main.html';
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+
+        // Carregar dados do pedido
+        async function carregarPedido() {
+            if (!pedidoId) {
+                window.location.href = 'main.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8080/pedidos/${pedidoId}/itens`, {
+                    headers: {
+                        ...PetAuth.getAuthHeaders()
+                    }
+                });
+
+                if (!response.ok) throw new Error('Pedido não encontrado');
+
+                const itens = await response.json();
+
+                // Atualizar UI
+                document.getElementById('pedidoId').textContent = `#${String(pedidoId).padStart(6, '0')}`;
+                document.getElementById('dataPedido').textContent = new Date().toLocaleDateString('pt-BR');
+
+                // Listar itens
+                let total = 0;
+                const itensList = document.getElementById('itensList');
+                itensList.innerHTML = itens.map(item => {
+                    total += item.precoUnitario * item.quantidade;
+                    return `
+                        <div class="flex gap-4 pb-3 border-b border-border last:border-b-0">
+                            <img src="${item.imagemProduto}" alt="${item.nomeProduto}" 
+                                class="w-16 h-16 rounded-lg object-cover">
+                            <div class="flex-1">
+                                <p class="font-semibold text-charcoal">${item.nomeProduto}</p>
+                                <p class="text-sm text-muted">Qtd: ${item.quantidade}</p>
+                                <p class="text-sm font-semibold text-teal">${formatarMoeda(item.precoUnitario)}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-charcoal">${formatarMoeda(item.precoUnitario * item.quantidade)}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Atualizar totais
+                document.getElementById('subtotal').textContent = formatarMoeda(total);
+                document.getElementById('total').textContent = formatarMoeda(total);
+
+            } catch (error) {
+                alert('Erro ao carregar pedido: ' + error.message);
+                window.location.href = 'main.html';
+            }
+        }
+
+        // Renderizar estado de autenticação
+        function renderAuthState() {
+            const auth = PetAuth.getAuthData();
+            const area = document.querySelector('[data-auth-area]');
+            
+            if (auth?.token) {
+                area.innerHTML = `
+                    <span class="hidden sm:inline text-sm font-semibold text-charcoal">${auth.nome}</span>
+                    <button onclick="logout()" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-red-500 transition-all">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                `;
+            }
+        }
+
+        function logout() {
+            PetAuth.logout();
+            window.location.href = 'main.html';
+        }
+
+        // Carregar ao iniciar
+        carregarPedido();
+        renderAuthState();
+    </script>
+</body>
+
+</html>

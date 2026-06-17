@@ -1,5 +1,6 @@
 package com.pedrodetonhe.petshop.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,12 +9,14 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_usuario;
+    @Column(name = "id_usuario")
+    private Integer id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -26,20 +29,20 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id_usuario, String nome, String email, String senha, Role role) {
-        this.id_usuario = id_usuario;
+    public Usuario(Integer id, String nome, String email, String senha, Role role) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.role = role;
     }
 
-    public Integer getId_usuario() {
-        return id_usuario;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {

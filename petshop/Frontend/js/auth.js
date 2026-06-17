@@ -30,6 +30,7 @@ function logout() {
     localStorage.removeItem(AUTH_STORAGE_KEY);
     renderAuthState();
     refreshRoleDependentContent();
+    window.PetCart?.renderCartState();
 }
 
 function openAuthModal(mode = "login") {
@@ -149,6 +150,7 @@ async function submitAuthForm(event) {
         setTimeout(closeAuthModal, 400);
         renderAuthState();
         refreshRoleDependentContent();
+        window.PetCart?.syncLocalCartToBackend?.();
     } catch (error) {
         showAuthMessage(error.message || "Erro ao conectar com o servidor.");
     }
@@ -190,6 +192,10 @@ function renderAuthState() {
 function refreshRoleDependentContent() {
     if (typeof carregarCategorias === "function") {
         carregarCategorias();
+    }
+
+    if (typeof renderAdminPageState === "function") {
+        renderAdminPageState();
     }
 }
 

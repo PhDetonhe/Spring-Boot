@@ -40,4 +40,11 @@ public class AuthController {
         AuthResponse response = usuarioService.login(request);
         return ResponseEntity.ok(response);
     }
+
+    // POST /auth/bootstrap/admin — apenas para criar o primeiro admin (bootstrap do sistema)
+    @PostMapping("/bootstrap/admin")
+    public ResponseEntity<AuthResponse> bootstrapAdmin(@RequestBody RegisterRequest request) {
+        AuthResponse response = usuarioService.bootstrapAdmin(request);
+        return ResponseEntity.ok(response);
+    }
 }

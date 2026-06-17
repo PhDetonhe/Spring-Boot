@@ -61,6 +61,10 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span data-cart-count class="hidden absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal text-xs font-bold flex items-center justify-center"></span>
                 </button>
+                <a data-admin-only href="admin.html" title="Administradores"
+                    class="hidden w-10 h-10 rounded-full items-center justify-center hover:bg-cream hover:text-teal transition-all">
+                    <i class="fa-solid fa-user-shield"></i>
+                </a>
                 <button data-admin-only onclick="abrirProdutos()"
                     class="hidden items-center gap-1.5 bg-teal hover:bg-teal-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-plus text-xs"></i> Novo produto
@@ -129,6 +133,12 @@
                     </div>
                 </div>
 
+                <div>
+                    <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Imagem</label>
+                    <input id="produtoImagem" type="file" accept="image/*"
+                        class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none file:mr-3 file:border-0 file:bg-teal file:text-white file:rounded-lg file:px-3 file:py-1.5 file:font-semibold focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all">
+                </div>
+
                 <button type="submit"
                     class="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3.5 rounded-xl transition-all hover:-translate-y-0.5 mt-1">
                     Salvar produto
@@ -171,6 +181,7 @@
         </div>
     </footer>
 
+    <script src="js/imageUtils.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/modal.js"></script>

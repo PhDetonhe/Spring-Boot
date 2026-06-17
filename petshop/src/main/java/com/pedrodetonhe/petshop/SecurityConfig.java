@@ -30,6 +30,8 @@ public class SecurityConfig {
 
                 // ========== ROTAS PÚBLICAS ==========
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/auth/bootstrap/admin").permitAll()  // Bootstrap - criar primeiro admin
+                .requestMatchers(HttpMethod.POST, "/auth/cadastro/admin").hasRole("ADMIN")  // Criar mais admins - requer ADMIN
                 .requestMatchers("/auth/**").permitAll()                    // Login e cadastro
 
                 // ========== CATEGORIAS ==========
@@ -43,6 +45,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/produtos/**").hasRole("ADMIN")        // Só ADMIN cria
                 .requestMatchers(HttpMethod.PUT, "/produtos/**").hasRole("ADMIN")         // Só ADMIN edita
                 .requestMatchers(HttpMethod.DELETE, "/produtos/**").hasRole("ADMIN")      // Só ADMIN deleta
+
+                // ========== PEDIDOS ==========
+                .requestMatchers("/pedidos/**").authenticated()
 
                 // ========== USUÁRIOS ==========
                 .requestMatchers(HttpMethod.GET, "/usuarios/**").hasRole("ADMIN")         // Só ADMIN lista todos

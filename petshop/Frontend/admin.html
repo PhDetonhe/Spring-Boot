@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administradores - PetShop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'Georgia', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#FDF6EC',
+                        'warm-white': '#FEFAF4',
+                        teal: { DEFAULT: '#1A7A6E', light: '#2A9D8F', dark: '#0D5C52' },
+                        amber: { DEFAULT: '#E9A84C', light: '#F4C07A' },
+                        charcoal: '#1C2321',
+                        border: '#E2D9CC',
+                        muted: '#8A8F8D',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                    animation: { 'slide-up': 'slideUp 0.25s ease forwards' },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+
+<body class="bg-cream font-body text-charcoal min-h-screen flex flex-col">
+    <nav class="bg-warm-white border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between gap-6">
+            <a href="main.html" class="flex items-center gap-2 group no-underline">
+                <div class="w-10 h-10 bg-teal rounded-full flex items-center justify-center text-white text-lg flex-shrink-0">
+                    <i class="fa-solid fa-paw"></i>
+                </div>
+                <span class="font-display text-2xl font-black text-charcoal group-hover:text-teal transition-colors">PetShop</span>
+            </a>
+
+            <div class="flex items-center gap-1">
+                <a href="main.html" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-teal transition-all" title="Inicio">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                <div data-auth-area class="flex items-center gap-1"></div>
+                <button title="Carrinho" onclick="PetCart.openCart()" class="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-cream hover:text-amber transition-all">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span data-cart-count class="hidden absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal text-xs font-bold flex items-center justify-center"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 max-w-7xl mx-auto px-6 py-10 w-full">
+        <div id="adminGuard" class="hidden bg-white border border-border rounded-xl p-8">
+            <h1 class="font-display text-3xl font-bold text-charcoal">Acesso administrativo</h1>
+            <p class="text-muted text-sm mt-2">Entre com uma conta ADMIN para gerenciar administradores.</p>
+            <button type="button" onclick="PetAuth.openAuthModal('login')"
+                class="mt-6 bg-teal hover:bg-teal-dark text-white font-semibold px-5 py-3 rounded-lg transition-colors">
+                Entrar
+            </button>
+        </div>
+
+        <section id="adminContent" class="hidden grid lg:grid-cols-[420px_1fr] gap-6 items-start">
+            <div class="bg-white border border-border rounded-xl p-6 shadow-sm">
+                <h1 class="font-display text-3xl font-bold text-charcoal">Novo admin</h1>
+                <p class="text-muted text-sm mt-1 mb-6">Crie uma conta com permissao administrativa.</p>
+
+                <form id="adminForm" class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Nome</label>
+                        <input id="adminNome" type="text" autocomplete="name" placeholder="Nome do admin"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">E-mail</label>
+                        <input id="adminEmail" type="email" autocomplete="email" placeholder="admin@email.com"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold tracking-widest uppercase text-charcoal mb-1.5">Senha</label>
+                        <input id="adminSenha" type="password" autocomplete="new-password" placeholder="Senha inicial"
+                            class="w-full px-4 py-3 border-[1.5px] border-border rounded-xl bg-warm-white text-charcoal text-sm outline-none focus:border-teal-light focus:ring-2 focus:ring-teal-light/10 focus:bg-white transition-all placeholder-muted">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-teal hover:bg-teal-dark text-white font-semibold py-3.5 rounded-xl transition-all hover:-translate-y-0.5">
+                        Criar administrador
+                    </button>
+                </form>
+
+                <p id="adminMessage" class="text-sm mt-4"></p>
+            </div>
+
+            <div class="bg-white border border-border rounded-xl p-6 shadow-sm">
+                <div class="flex items-center justify-between gap-3 mb-5">
+                    <div>
+                        <h2 class="font-display text-2xl font-bold text-charcoal">Usuarios</h2>
+                        <p class="text-muted text-sm">Contas cadastradas no sistema.</p>
+                    </div>
+                    <button type="button" onclick="carregarUsuariosAdmin()" title="Atualizar"
+                        class="w-10 h-10 rounded-lg border border-border hover:bg-cream transition-colors">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="text-left text-[11px] uppercase tracking-widest text-muted border-b border-border">
+                            <tr>
+                                <th class="py-3 pr-4">Nome</th>
+                                <th class="py-3 pr-4">E-mail</th>
+                                <th class="py-3 pr-4">Perfil</th>
+                                <th class="py-3">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminUsersTable" class="divide-y divide-border"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/imageUtils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

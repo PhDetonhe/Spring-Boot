@@ -73,6 +73,10 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span data-cart-count class="hidden absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal text-xs font-bold flex items-center justify-center"></span>
                 </button>
+                <a data-admin-only href="admin.html" title="Administradores"
+                    class="hidden w-10 h-10 rounded-full items-center justify-center hover:bg-cream hover:text-teal transition-all">
+                    <i class="fa-solid fa-user-shield"></i>
+                </a>
                 <button data-admin-only onclick="abrir()"
                     class="hidden ml-2 items-center gap-1.5 bg-teal hover:bg-teal-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition-all hover:-translate-y-0.5">
                     <i class="fa-solid fa-plus text-xs"></i> Nova categoria
@@ -183,8 +187,10 @@
         </div>
     </footer>
 
+    <script src="js/imageUtils.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/fetchCategorias.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/cadastroCat.js"></script>

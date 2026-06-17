@@ -44,7 +44,7 @@ public class UsuarioService {
         usuario = repository.save(usuario);
 
         String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
-        return new AuthResponse(token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
+        return new AuthResponse(usuario.getId(), token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
     }
 
     // ==================== CADASTRO ADMIN (apenas ADMIN pode chamar) ====================
@@ -63,7 +63,7 @@ public class UsuarioService {
         usuario = repository.save(usuario);
 
         String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
-        return new AuthResponse(token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
+        return new AuthResponse(usuario.getId(), token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
     }
 
     // ==================== LOGIN ====================
@@ -76,7 +76,31 @@ public class UsuarioService {
         }
 
         String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
-        return new AuthResponse(token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
+        return new AuthResponse(usuario.getId(), token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
+    }
+
+    // ==================== BOOTSTRAP ADMIN (apenas para criar o primeiro admin) ====================
+    public AuthResponse bootstrapAdmin(RegisterRequest request) {
+        // Verificar se já existe algum admin
+        long adminCount = repository.countByRole(Usuario.Role.ADMIN);
+        if (adminCount > 0) {
+            throw new RuntimeException("Sistema ja inicializado! Um admin ja existe. Use /auth/cadastro/admin com credenciais de admin.");
+        }
+
+        if (repository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("E-mail já cadastrado!");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNome(request.getNome());
+        usuario.setEmail(request.getEmail());
+        usuario.setSenha(passwordEncoder.encode(request.getSenha()));
+        usuario.setRole(Usuario.Role.ADMIN);
+
+        usuario = repository.save(usuario);
+
+        String token = jwtUtil.generateToken(usuario.getEmail(), usuario.getRole().name());
+        return new AuthResponse(usuario.getId(), token, usuario.getNome(), usuario.getEmail(), usuario.getRole().name());
     }
 
     // ==================== LISTAR TODOS (ADMIN) ====================

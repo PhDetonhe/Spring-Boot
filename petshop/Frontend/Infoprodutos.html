@@ -64,6 +64,10 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span data-cart-count class="hidden absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal text-xs font-bold flex items-center justify-center"></span>
                 </button>
+                <a data-admin-only href="admin.html" title="Administradores"
+                    class="hidden w-10 h-10 rounded-full items-center justify-center hover:bg-cream hover:text-teal transition-all">
+                    <i class="fa-solid fa-user-shield"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -74,8 +78,8 @@
 
     <main class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10 flex-1 w-full">
         <div>
-            <div class="bg-warm-white border border-border rounded-xl flex items-center justify-center aspect-square">
-                <img id="img" alt="" class="object-contain p-6 max-h-full">
+            <div class="bg-warm-white border border-border rounded-xl flex items-center justify-center aspect-square overflow-hidden">
+                <img id="img" alt="" class="w-full h-full object-contain p-8">
             </div>
         </div>
 
@@ -137,6 +141,7 @@
         </div>
     </footer>
 
+    <script src="js/imageUtils.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/fetchCategorias.js"></script>
