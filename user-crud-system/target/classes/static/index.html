@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UserHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen flex items-center justify-center bg-slate-50">
+  <div class="flex flex-col items-center gap-3 text-slate-400">
+    <span class="spinner" style="border-color: rgba(67,56,202,0.25); border-top-color:#4338ca; width:28px; height:28px;"></span>
+    <span class="text-sm">Carregando...</span>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script>
+    (async () => {
+      try {
+        await Api.me();
+        window.location.href = '/users.html';
+      } catch (_) {
+        window.location.href = '/login.html';
+      }
+    })();
+  </script>
+</body>
+</html>

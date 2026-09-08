@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar conta | Sistema de Usuários</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen">
+  <div id="toast-container" class="fixed top-4 right-4 z-50 w-80"></div>
+
+  <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+    <div class="hidden lg:flex brand-panel text-white flex-col justify-between p-12">
+      <div class="font-display text-2xl font-bold tracking-tight">UserHub</div>
+      <div>
+        <p class="font-display text-3xl font-semibold leading-snug max-w-md">
+          Crie sua conta em menos de um minuto.
+        </p>
+        <p class="mt-4 text-indigo-100 max-w-sm">
+          Sua senha nunca é armazenada em texto puro — usamos hash BCrypt em cada cadastro.
+        </p>
+      </div>
+      <div class="text-indigo-200 text-sm">Spring Boot &middot; MySQL &middot; Resend</div>
+    </div>
+
+    <div class="flex items-center justify-center p-6 sm:p-10">
+      <div class="w-full max-w-sm">
+        <div class="lg:hidden font-display text-2xl font-bold text-indigo-700 mb-8">UserHub</div>
+
+        <h1 class="font-display text-2xl font-semibold text-slate-900">Criar sua conta</h1>
+        <p class="text-slate-500 mt-1 mb-8">Preencha os dados abaixo para se cadastrar.</p>
+
+        <form id="register-form" class="space-y-5" novalidate>
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nome completo</label>
+            <input type="text" id="name" name="name" required minlength="2"
+              class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              placeholder="Seu nome" />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
+            <input type="email" id="email" name="email" required
+              class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              placeholder="voce@exemplo.com" />
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-slate-700 mb-1">Senha</label>
+            <input type="password" id="password" name="password" required minlength="6"
+              class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              placeholder="Mínimo 6 caracteres" />
+          </div>
+
+          <button type="submit" id="register-btn"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg px-4 py-2.5 transition-colors">
+            Criar conta
+          </button>
+        </form>
+
+        <p class="text-sm text-slate-500 mt-8 text-center">
+          Já tem conta?
+          <a href="/login.html" class="font-medium text-indigo-600 hover:text-indigo-700">Entrar</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/register.js"></script>
+</body>
+</html>

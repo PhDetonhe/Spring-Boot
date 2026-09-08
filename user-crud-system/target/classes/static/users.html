@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuários | UserHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="min-h-screen">
+  <div id="toast-container" class="fixed top-4 right-4 z-50 w-80"></div>
+
+  <!-- Cabeçalho -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="font-display text-xl font-bold text-indigo-700">UserHub</div>
+      <div class="flex items-center gap-4">
+        <span id="current-user-name" class="text-sm text-slate-500"></span>
+        <button id="logout-btn"
+          class="text-sm font-medium text-slate-600 hover:text-red-600 border border-slate-300 hover:border-red-300 rounded-lg px-3 py-1.5 transition-colors">
+          Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="font-display text-2xl font-semibold text-slate-900">Usuários cadastrados</h1>
+        <p class="text-slate-500 mt-1">Visualize, edite ou remova usuários do sistema.</p>
+      </div>
+      <a href="/register.html"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg px-4 py-2.5 transition-colors">
+        + Novo usuário
+      </a>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      <table class="w-full text-sm text-left">
+        <thead class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wide">
+          <tr>
+            <th class="px-6 py-3 font-medium">Nome</th>
+            <th class="px-6 py-3 font-medium">E-mail</th>
+            <th class="px-6 py-3 font-medium">Cadastrado em</th>
+            <th class="px-6 py-3 font-medium text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="users-table-body" class="divide-y divide-slate-100">
+          <tr>
+            <td colspan="4" class="px-6 py-10 text-center text-slate-400">Carregando usuários...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="empty-state" class="hidden text-center py-16 text-slate-400">
+      Nenhum usuário cadastrado ainda.
+    </div>
+  </main>
+
+  <!-- Modal de edição -->
+  <div id="edit-modal" class="hidden fixed inset-0 bg-slate-900/50 flex items-center justify-center p-6 z-40">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+      <h2 class="font-display text-lg font-semibold text-slate-900 mb-4">Editar usuário</h2>
+
+      <form id="edit-form" class="space-y-4">
+        <input type="hidden" id="edit-id" />
+        <div>
+          <label for="edit-name" class="block text-sm font-medium text-slate-700 mb-1">Nome</label>
+          <input type="text" id="edit-name" required minlength="2"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="edit-email" class="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
+          <input type="email" id="edit-email" required
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" />
+        </div>
+        <div>
+          <label for="edit-password" class="block text-sm font-medium text-slate-700 mb-1">
+            Nova senha <span class="text-slate-400 font-normal">(opcional)</span>
+          </label>
+          <input type="password" id="edit-password" minlength="6" placeholder="Deixe em branco para manter a atual"
+            class="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" />
+        </div>
+
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="edit-cancel-btn"
+            class="px-4 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">
+            Cancelar
+          </button>
+          <button type="submit" id="edit-save-btn"
+            class="px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium">
+            Salvar alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de confirmação de exclusão -->
+  <div id="delete-modal" class="hidden fixed inset-0 bg-slate-900/50 flex items-center justify-center p-6 z-40">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 text-center">
+      <div class="mx-auto w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-4">
+        !
+      </div>
+      <h2 class="font-display text-lg font-semibold text-slate-900">Excluir usuário</h2>
+      <p class="text-slate-500 mt-2">
+        Tem certeza que deseja excluir <span id="delete-user-name" class="font-medium text-slate-700"></span>?
+        Esta ação não pode ser desfeita.
+      </p>
+      <div class="flex justify-center gap-3 mt-6">
+        <button type="button" id="delete-cancel-btn"
+          class="px-4 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 font-medium">
+          Cancelar
+        </button>
+        <button type="button" id="delete-confirm-btn"
+          class="px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium">
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/users.js"></script>
+</body>
+</html>
